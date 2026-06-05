@@ -1,0 +1,144 @@
+:root {
+    --gold: #B8973A;
+    --gold-light: #D4AF55;
+    --gold-pale: #EDD98A;
+    --gold-faint: #F7F0DC;
+    --beige: #F5EFE0;
+    --beige-dark: #E8DEC8;
+    --cream: #FDFAF4;
+    --white: #FFFFFF;
+    --dark: #1E1A12;
+    --text-dark: #2C2418;
+    --text-mid: #6B5B3E;
+    --text-light: #9E8C6E;
+    --shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Jost', sans-serif;
+    background-color: var(--cream);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+h1, h2, h3, .title {
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Navigation */
+.main-nav {
+    background-color: var(--white);
+    box-shadow: var(--shadow);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 2px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-mid);
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--gold);
+}
+
+.user-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logout-btn, .login-btn {
+    padding: 0.5rem 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s;
+    text-decoration: none;
+}
+
+.login-btn {
+    background-color: var(--gold);
+    color: var(--white);
+    border: none;
+}
+
+.logout-btn {
+    background-color: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+}
+
+.logout-btn:hover {
+    background-color: var(--gold);
+    color: var(--white);
+}
+
+/* Header */
+.page-header {
+    background-color: var(--beige);
+    padding: 3rem 0;
+    text-align: center;
+    border-bottom: 1px solid var(--beige-dark);
+}
+
+.page-title {
+    font-size: 2.5rem;
+    color: var(--text-dark);
+}
+
+/* Main Content */
+main {
+    padding: 3rem 0;
+    min-height: 60vh;
+}
+
+/* Footer */
+.main-footer {
+    background-color: var(--dark);
+    color: var(--white);
+    padding: 2rem 0;
+    text-align: center;
+    margin-top: auto;
+}
+
+.py-6 {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
