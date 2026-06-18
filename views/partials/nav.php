@@ -47,8 +47,7 @@
                         </form>
                     </li>
                 <?php else: ?>
-                    <li><a href="/" class="<?= urlIs('/') ? 'active' : '' ?>">Login</a></li>
-                    <li><a href="/login" class="<?= urlIs('/login') ? 'active' : '' ?>">Login</a></li>
+                    <li><a href="/login" class="<?= urlIs('/login') || urlIs('/') ? 'active' : '' ?>">Login</a></li>
                 <?php endif; ?>
             </ul>
         </div>

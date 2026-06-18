@@ -23,6 +23,8 @@ $router->get("/admin/checks", "controllers/admin/checks.php");
 $router->get("/admin/manual_order", "controllers/admin/manual_order.php");
 $router->get("/admin/products/add", "controllers/admin/add_product.php");
 $router->post("/admin/products/add", "controllers/admin/add_product.php");
+$router->get("/admin/products/edit", "controllers/admin/edit_product.php");
+$router->post("/admin/products/edit", "controllers/admin/edit_product.php");
 
 // User Routes
 $router->get("/user/home", "controllers/user/home.php");
