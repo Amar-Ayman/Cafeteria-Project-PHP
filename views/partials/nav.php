@@ -23,24 +23,30 @@
 
                     <style>
                         .logout-btn {
-                            background-color: #343a40;
-                            color: white;
-                            border: 1px solid #343a40;
-                            padding: 8px 20px;
-                            border-radius: 6px;
+                            background: none;
+                            border: none;
+                            color: var(--text-mid, #6B5B3E);
+                            font-weight: 600;
                             cursor: pointer;
-                            font-weight: 500;
+                            padding: 0;
+                            font-size: 16px;
+                            font-family: inherit;
                             transition: all 0.3s ease;
-                            margin-left: 10px;
                         }
 
                         .logout-btn:hover {
-                             background-color: transparent;
-                             color: #343a40;
-                            box-shadow: 0 2px 5px rgba(0,0,0,0.1);                            transform: translateY(-1px);
+                            color: #E05252;
+                            text-decoration: underline;
+                            transform: scale(1.05);
                         }
-                    </style>
 
+                        .nav-links li form {
+                            display: inline;
+                            margin: 0;
+                            padding: 0;
+                        }
+
+                    </style>
                     <li>
                         <form action="/logout" method="POST" style="display: inline;">
                             <button type="submit" class="logout-btn">Logout</button>
