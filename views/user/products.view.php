@@ -37,6 +37,9 @@ require base_path("views/partials/nav.php");
       flex-wrap: wrap;
       gap: 20px;
    }
+   .products-header h1 span {
+      color: #B8973A;
+   }
 
    .products-title {
       color: var(--dark);
@@ -71,8 +74,9 @@ require base_path("views/partials/nav.php");
    }
 
    .btn-cart:hover {
-      background: var(--dark);
-      transform: translateY(-2px);
+      background: #654321  ;
+      /* transform: translateY(-2px); */
+      scale: 1.1;
    }
 
    .cart-count {
@@ -116,9 +120,9 @@ require base_path("views/partials/nav.php");
    }
 
    .product-card {
-      background-color: var(--white);
-      border: 1px solid var(--border-lt);
-      border-radius: 16px;
+      background: #F6EBDD;
+      border: 1px solid #D4AF55;
+      border-radius: 15px;
       overflow: hidden;
       box-shadow: 0 4px 15px rgba(0,0,0,0.03);
       transition: 0.3s;
@@ -127,14 +131,13 @@ require base_path("views/partials/nav.php");
    }
 
    .product-card:hover {
-      box-shadow: 0 8px 25px rgba(184, 151, 58, 0.15);
-      border-color: var(--gold);
-      transform: translateY(-5px);
+      box-shadow: 0 0 10px #D4AF55;
+      transform: translateY(-10px);
    }
 
    .product-image-wrapper {
       width: 100%;
-      height: 180px;
+      height: 200px;
       background-color: var(--bg);
       overflow: hidden;
    }
@@ -166,12 +169,12 @@ require base_path("views/partials/nav.php");
    }
 
    .btn-add-order {
-      width: 100%;
-      background: var(--surface);
+      width: 90%;
+      background: #fff;
       color: var(--gold);
       border: 1px solid var(--gold-pale);
       padding: 10px;
-      border-radius: 8px;
+      border-radius: 20px;
       cursor: pointer;
       font-weight: 600;
       font-family: 'Jost', sans-serif;
@@ -194,9 +197,9 @@ require base_path("views/partials/nav.php");
 
 <main class="products-container">
    <div class="products-header">
-      <h1 class="products-title">Our Menu</h1>
+      <h1 class="products-title">Our <span class="header">Menu</span></h1>
       <a href="/order" class="btn-cart">
-         <span>View Order</span>
+         <span>View cart</span>
          <span class="cart-count" id="cart-count">0</span>
       </a>
    </div>

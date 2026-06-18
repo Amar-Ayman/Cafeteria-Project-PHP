@@ -26,6 +26,7 @@ $router->delete("/admin/orders", "controllers/admin/orders.php");
 $router->get("/admin/order", "controllers/admin/orders.php");
 $router->get("/admin/checks", "controllers/admin/checks.php");
 $router->get("/admin/manual_order", "controllers/admin/manual_order.php");
+$router->post("/admin/manual_order", "controllers/admin/manual_order.php");
 
 $router->get("/user/home", "controllers/user/home.php");
 $router->get("/user/my_orders", "controllers/user/my_orders.php");

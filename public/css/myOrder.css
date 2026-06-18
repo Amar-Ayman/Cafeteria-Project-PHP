@@ -1,0 +1,119 @@
+* {
+    font-family: 'Jost', sans-serif;
+}
+
+body {
+    box-sizing: border-box;
+    margin: 0;
+    background: var(--cream);
+}
+
+.container {
+    max-width: 850px;
+    margin: 50px auto;
+    padding: 0 20px 80px;
+}
+
+h1 {
+    font-family: 'Cormorant Garamond', serif;
+    text-align: center;
+    font-size: 3rem;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+}
+
+h1::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 3px;
+    background: var(--gold);
+    margin: 16px auto 40px;
+    border-radius: 2px;
+}
+
+.order-card {
+    background: var(--white);
+    border: 1px solid var(--beige-dark);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.order-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.10);
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.order-id {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.status {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    background: var(--gold-faint);
+    color: var(--gold);
+    border: 1px solid var(--gold-pale);
+}
+
+.date {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-bottom: 18px;
+}
+
+.items {
+    border-top: 1px solid var(--beige-dark);
+    border-bottom: 1px solid var(--beige-dark);
+    padding: 14px 0;
+    margin-bottom: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-dark);
+    font-size: 0.97rem;
+}
+
+.item span:last-child {
+    color: var(--text-light);
+}
+
+.total {
+    text-align: right;
+    font-size: 1.05rem;
+    color: var(--text-mid);
+    font-weight: 600;
+}
+
+.empty {
+    background: var(--white);
+    border: 1px solid var(--beige-dark);
+    border-radius: 16px;
+    padding: 60px;
+    text-align: center;
+    color: var(--text-light);
+    font-size: 1.1rem;
+    box-shadow: var(--shadow);
+}
