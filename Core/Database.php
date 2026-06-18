@@ -3,6 +3,7 @@
 namespace Core;
 
 use PDO;
+use PDOException;
 
 class Database
 {
@@ -11,13 +12,19 @@ class Database
 
     public function __construct($config)
     {
-        $dsn = "mysql:" . http_build_query($config, 
-'', 
-';');
+        $username = $config['username'] ?? 'root';
+        $password = $config['password'] ?? '';
+        
+        $dsn = "mysql:host=" . $config['host'] . ";port=" . $config['port'] . ";dbname=" . $config['dbname'] . ";charset=" . $config['charset'];
 
-        $this->connection = new PDO(dsn: $dsn, options: [
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-        ]);
+        try {
+            $this->connection = new PDO($dsn, $username, $password, [
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+            ]);
+        } catch (PDOException $e) {
+            die("Connection Failed: " . $e->getMessage());
+        }
     }
 
     public function query($query, $params = [])
@@ -40,11 +47,9 @@ class Database
     public function findOrFail()
     {
         $result = $this->find();
-
         if (!$result) {
             abort();
         }
-
         return $result;
     }
 }

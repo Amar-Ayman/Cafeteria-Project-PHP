@@ -1,3 +1,8 @@
+
+html, body {
+    scroll-behavior: smooth;
+}
+
 :root {
     --gold: #B8973A;
     --gold-light: #D4AF55;
@@ -29,10 +34,10 @@ body { background-color: var(--cream); font-family: 'Jost', sans-serif; }
 
 .nav-container {
     display: flex;
-    flex-direction: row-reverse; 
+    flex-direction: row; 
     justify-content: space-between;
     align-items: center;
-    height: 80px;
+    height: 70px;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
