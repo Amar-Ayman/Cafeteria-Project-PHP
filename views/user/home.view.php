@@ -47,40 +47,37 @@
     <div class="item">
         <div class="card">
         <span class="badge best">Best Seller</span>
-        <img src="/images/Pistachio Dream Cheesecake.png" alt="">
+        <img src="/images/chesse cake.jpg.jpeg" alt="">
         <h2 class="name">Pistachio Dream Cheesecake</h2>
         <h2 class="price">170 EGY</h2>
         <div class="buttons">
             <button class="order" data-id="1">
                  Order Now
             </button>
-            <button>add to cart+</button>
         </div>
     </div>
 
     <div class="card">
         <span class="badge new">New</span>
-        <img src="/images/Salted Caramel Cold Brew.png" alt="">
+        <img src="/images/latte.jpg.jpeg" alt="">
         <h2 class="name">Salted Caramel Cold Brew</h2>
         <h2 class="price">120 EGY</h2>
         <div class="buttons">
             <button class="order" data-id="2">
                 Order Now
             </button>
-            <button>add to cart+</button>
         </div>
     </div>
 
     <div class="card">
         <span class="badge offer"> OFFER</span>
-        <img src="/images/White Chocolate Mocha.png" alt="">
+        <img src="/images/White Chocolate.jpg.jpeg" alt="">
         <h2 class="name">White Chocolate Mocha</h2>
         <h2 class="price">120 EGY</h2>
         <div class="buttons">
             <button class="order" data-id="3">
                 Order Now
             </button>
-            <button>add to cart+</button>
         </div>
     </div>
 </div>
@@ -129,40 +126,15 @@
 </div>
 
     <link rel="stylesheet" href="/css/home.css">
-   <script>
 
+    <script>
 document.querySelectorAll(".order").forEach(button => {
-
     button.addEventListener("click", function(){
-
-        let card = this.closest(".card");
-
-        let product = {
-
-            id: this.dataset.id,
-
-            image: card.querySelector("img").src,
-
-            name: card.querySelector(".name").innerText,
-
-            price: card.querySelector(".price").innerText
-
-        };
-
-
-        localStorage.setItem(
-            "orderProduct",
-            JSON.stringify(product)
-        );
-
-
-        window.location.href = "/order";
-
+        window.location.href = "/user/products";
     });
-
 });
-
 </script>
+
 <?php require base_path('views/partials/footer.php') ?>
 
 

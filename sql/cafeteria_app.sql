@@ -1,68 +1,81 @@
--- 1. Create and Use Database
-4	CREATE DATABASE IF NOT EXISTS `cafeteria_app`;
-5	USE `cafeteria_app`;
-6	
-7	-- 2. Categories Table
-8	CREATE TABLE `categories` (
-9	    `id` INT AUTO_INCREMENT PRIMARY KEY,
-10	    `name` VARCHAR(100) NOT NULL UNIQUE
-11	);
-12	
-13	-- 3. Users Table
-14	CREATE TABLE `users` (
-15	    `id` INT AUTO_INCREMENT PRIMARY KEY,
-16	    `name` VARCHAR(100) NOT NULL,
-17	    `email` VARCHAR(100) NOT NULL UNIQUE,
-18	    `password` VARCHAR(255) NOT NULL,
-19	    `room_no` VARCHAR(20),
-20	    `ext` VARCHAR(20),
-21	    `profile_picture` VARCHAR(255),
-22	    `role` ENUM('admin', 'user') DEFAULT 'user'
-23	);
-24	
-25	-- 4. Products Table
-26	CREATE TABLE `products` (
-27	    `id` INT AUTO_INCREMENT PRIMARY KEY,
-28	    `name` VARCHAR(100) NOT NULL,
-29	    `price` DECIMAL(10, 2) NOT NULL,
-30	    `category_id` INT NOT NULL,
-31	    `image` VARCHAR(255),
-32	    `status` ENUM('available', 'unavailable') DEFAULT 'available',
-33	    FOREIGN KEY (`category_id`) REFERENCES `categories`(`id`) ON DELETE CASCADE
-34	);
-35	
-36	-- 5. Orders Table
-37	CREATE TABLE `orders` (
-38	    `id` INT AUTO_INCREMENT PRIMARY KEY,
-39	    `user_id` INT NOT NULL,
-40	    `total_amount` DECIMAL(10, 2) NOT NULL,
-41	    `status` ENUM('processing', 'out for delivery', 'done') DEFAULT 'processing',
-42	    `room` VARCHAR(20),
-43	    `notes` TEXT,
-44	    `order_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-45	    FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE
-46	);
-47	
-48	-- 6. Order_Items Table (Link between Orders and Products)
-49	CREATE TABLE `order_items` (
-50	    `order_id` INT NOT NULL,
-51	    `product_id` INT NOT NULL,
-52	    `quantity` INT NOT NULL DEFAULT 1,
-53	    `price` DECIMAL(10, 2) NOT NULL,
-54	    PRIMARY KEY (`order_id`, `product_id`),
-55	    FOREIGN KEY (`order_id`) REFERENCES `orders`(`id`) ON DELETE CASCADE,
-56	    FOREIGN KEY (`product_id`) REFERENCES `products`(`id`) ON DELETE CASCADE
-57	);
-58	
-59	-- Sample Data
-60	INSERT INTO `categories` (`name`) VALUES ('Hot Drinks'), ('Cold Drinks'), ('Snacks');
-61	
-62	INSERT INTO `users` (`name`, `email`, `password`, `room_no`, `ext`, `role`) VALUES 
-63	('Admin User', 'admin@cafeteria.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '101', '5555', 'admin'),
-64	('Regular User', 'user@cafeteria.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '202', '4444', 'user');
-65	
-66	INSERT INTO `products` (`name`, `price`, `category_id`, `status`) VALUES 
-67	('Tea', 5.00, 1, 'available'),
-68	('Coffee', 10.00, 1, 'available'),
-69	('Pepsi', 7.00, 2, 'available'),
-70	('Croissant', 15.00, 3, 'available');
+-- 1. مسح الداتابيز القديمة وإنشاء واحدة جديدة عشان نبدأ على نظافة
+DROP DATABASE IF EXISTS `cafeteria_app`;
+CREATE DATABASE `cafeteria_app` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `cafeteria_app`;
+
+-- 2. جدول الأقسام
+CREATE TABLE `categories` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(100) NOT NULL UNIQUE
+) ENGINE=InnoDB;
+
+-- 3. جدول المستخدمين (الباسوورد هنا نص عادي مش مشفر عشان يشتغل مع كودك)
+CREATE TABLE `users` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(100) NOT NULL,
+    `email` VARCHAR(100) NOT NULL UNIQUE,
+    `password` VARCHAR(255) NOT NULL,
+    `room_no` VARCHAR(20) NULL,
+    `ext` VARCHAR(20) NULL,
+    `profile_picture` VARCHAR(255) NULL,
+    `role` ENUM('admin', 'user') DEFAULT 'user'
+) ENGINE=InnoDB;
+
+-- 4. جدول المنتجات
+CREATE TABLE `products` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(100) NOT NULL,
+    `price` DECIMAL(10, 2) NOT NULL,
+    `category_id` INT NOT NULL,
+    `image` VARCHAR(255) NULL,
+    `status` ENUM('available', 'unavailable') DEFAULT 'available',
+    FOREIGN KEY (`category_id`) REFERENCES `categories`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- 5. جدول الطلبات
+CREATE TABLE `orders` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `user_id` INT NOT NULL,
+    `total_amount` DECIMAL(10, 2) NOT NULL,
+    `order_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `status` ENUM('processing', 'out for delivery', 'done') DEFAULT 'processing',
+    `room` VARCHAR(20) NULL,
+    `notes` TEXT NULL,
+    FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- 6. جدول تفاصيل الطلب
+CREATE TABLE `order_items` (
+    `order_id` INT NOT NULL,
+    `product_id` INT NOT NULL,
+    `quantity` INT NOT NULL DEFAULT 1,
+    `price` DECIMAL(10, 2) NOT NULL,
+    PRIMARY KEY (`order_id`, `product_id`),
+    FOREIGN KEY (`order_id`) REFERENCES `orders`(`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`product_id`) REFERENCES `products`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+INSERT INTO `categories` (`id`, `name`) VALUES 
+(1, 'Hot Drinks'), (2, 'Cold Drinks'), (3, 'Snacks');
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `room_no`, `ext`, `role`) VALUES 
+(1, 'Admin User', 'admin@cafeteria.com', 'password', '101', '5555', 'admin'),
+(2, 'Regular User', 'user@cafeteria.com', 'password', '202', '4444', 'user');
+
+INSERT INTO `products` (`name`, `price`, `category_id`, `status`, `image`) VALUES 
+('Tea', 30.00, 1, 'available', 'tea.jpg.jpeg'),
+('Coffee', 60.00, 1, 'available', 'coffee.png'),
+('Pepsi', 20.00, 2, 'available', 'pepsi.jpg.jpeg'),
+('Croissant', 30.00, 3, 'available', 'croissant.jpg.jpeg'),
+('White Chocolate', 120.00, 1, 'available', 'White Chocolate.jpg.jpeg'),
+('Avocado Juice', 55.00, 2, 'available', 'avogado juice.jpg.jpeg'),
+('Brownies', 20.00, 3, 'available', 'browns.jpg.jpeg'),
+('Cheese Cake', 170.00, 3, 'available', 'chesse cake.jpg.jpeg'),
+('Cookies', 70.00, 3, 'available', 'cookies.jpg.jpeg'),
+('Donut', 25.00, 3, 'available', 'dount.jpg.jpeg'),
+('Latte', 120.00, 1, 'available', 'latte.jpg.jpeg'),
+('Lemon Juice', 40.00, 2, 'available', 'lemon juice.jpg.jpeg'),
+('Molten Cake', 70.00, 3, 'available', 'molton cake.jpg.jpeg'),
+('Orange Juice', 50.00, 2, 'available', 'orange.jpg.jpeg'),
+('Waffle', 40.00, 3, 'available', 'waffel.jpg.jpeg'),
+('Watermelon Juice', 40.00, 2, 'available', 'watermelon juice.jpg.jpeg');
