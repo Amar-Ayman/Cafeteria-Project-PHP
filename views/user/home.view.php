@@ -20,7 +20,7 @@
                     Daily: 7:00 AM – 2:00 AM
                     <span>Location:</span> 
                     Located inside the Luxury Hotel, offering a premium café experience in a comfortable and exclusive environment.
-                    SERENO CAFÉ — More than a café, it's an experience. ☕✨
+                    SERENO CAFÉ — More than a café, it's an experience.
                 </p>            
             </div>
             <div class="image">

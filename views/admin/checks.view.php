@@ -72,6 +72,24 @@ require base_path('views/partials/head.php') ?>
 
     .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #333; color: white; padding: 10px 20px; border-radius: 5px; display: none; }
     .toast.show { display: block; }
+
+    .details-btn {
+        background: var(--gold);
+        color: white;
+        padding: 6px 12px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 11px;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+    .details-btn:hover {
+        background: var(--dark);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
 </style>
 
 <div class="checks-container">
@@ -224,7 +242,7 @@ require base_path('views/partials/head.php') ?>
                 <td>${u.total_orders}</td>
                 <td style="color:var(--gold); font-weight:700;">${Math.round(u.total_amount)} EGP</td>
                 <td style="font-size:12px;">${u.last_order_date ? u.last_order_date.split(' ')[0] : '—'}</td>
-                <td><button style="font-size:11px; padding:3px 8px; cursor:pointer;">Details</button></td>
+                <td><button class="details-btn" onclick="selectUser(${u.id})">Details</button></td>
             </tr>
         `).join('');
         renderPagination();

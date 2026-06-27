@@ -40,8 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ])->find();
 
         if ($user) {
-            // Verify password
-            if ($password === $user['password']) {
+            // Verify password using bcrypt
+            if (verifyPassword($password, $user['password'])) {
                 Auth::login($user);
                 
                 // Redirect based on role

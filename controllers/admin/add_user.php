@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $name     = $_POST['name'];
         $room_no  = $_POST['Room_No']; 
         $ext      = $_POST['Ext'];     
-        $password = $_POST['pass']; 
+        $password = hashPassword($_POST['pass']); // Hash password using bcrypt 
         $profile_picture = 'default.jpeg'; 
 
         if (!empty($_FILES['picture']['name'])) {

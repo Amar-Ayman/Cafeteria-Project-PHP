@@ -73,12 +73,16 @@
     gap: 10px;
    }
    .btn-edit {
-    background: var(--blue);
+    background: var(--gold);
     color: white;
     padding: 8px 15px;
     border-radius: 8px;
     text-decoration: none;
     font-size: 14px;
+    transition: 0.3s;
+   }
+   .btn-edit:hover {
+    background: var(--dark);
    }
    .btn-delete {
     background: var(--red);
@@ -87,6 +91,10 @@
     border-radius: 8px;
     text-decoration: none;
     font-size: 14px;
+    transition: 0.3s;
+   }
+   .btn-delete:hover {
+    background: #c91e1e;
    }
 </style>
 

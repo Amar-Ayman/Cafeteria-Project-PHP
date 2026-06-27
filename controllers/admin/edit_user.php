@@ -26,8 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $room_no = $_POST['Room_No']; 
     $ext     = $_POST['Ext'];     
     
-    // الاحتفاظ بالباسورد القديم لو مدخلش باسور جديد
-    $password = !empty($_POST['pass']) ? $_POST['pass'] : $user['password'];
+    // الاحتفاظ بالباسورد القديم لو مدخلش باسور جديد، أو تشفير الجديد
+    $password = !empty($_POST['pass']) ? hashPassword($_POST['pass']) : $user['password'];
 
     $profile_picture = $user['profile_picture']; 
 

@@ -12,6 +12,68 @@
         --border: rgba(184,151,58,.25);
     }
 
+    .toast-container {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-width: 400px;
+    }
+
+    .toast {
+        background: #333;
+        color: white;
+        padding: 15px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        animation: slideIn 0.3s ease-out;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .toast.success {
+        background: #4CAF8A;
+    }
+
+    .toast.error {
+        background: #E05252;
+    }
+
+    .toast.info {
+        background: #4A90D9;
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateX(-50%) translateY(100px);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideOut {
+        from {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(-50%) translateY(100px);
+            opacity: 0;
+        }
+    }
+
+    .toast.hide {
+        animation: slideOut 0.3s ease-out forwards;
+    }
+
     .order-page {
         max-width: 1000px;
         margin: 40px auto;
@@ -274,12 +336,11 @@
     }
 
     function removeItem(index) {
-        if(confirm("Remove this item?")) {
-            let cart = getCart();
-            cart.splice(index, 1);
-            localStorage.setItem('cafe_order', JSON.stringify(cart));
-            renderCart();
-        }
+        let cart = getCart();
+        cart.splice(index, 1);
+        localStorage.setItem('cafe_order', JSON.stringify(cart));
+        renderCart();
+        showToast('Item removed from cart', 'info');
     }
 
     // Location toggle
@@ -296,10 +357,23 @@
         }
     });
 
+    function showToast(msg, type = 'info') {
+        const container = document.getElementById('toast-container');
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.textContent = msg;
+        container.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.classList.add('hide');
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
+    }
+
     async function confirmOrder() {
         const cart = getCart();
         if (cart.length === 0) {
-            alert("Your cart is empty!");
+            showToast('Your cart is empty!', 'error');
             return;
         }
 
@@ -325,19 +399,21 @@
 
             const result = await response.text();
             if (result.includes("success")) {
-                alert("Order placed successfully! ☕");
+                showToast('Order placed successfully! ☕', 'success');
                 localStorage.removeItem('cafe_order');
-                window.location.href = "/user/my_orders";
+                setTimeout(() => window.location.href = "/user/my_orders", 1500);
             } else {
-                alert("Error: " + result);
+                showToast('Error: ' + result, 'error');
             }
         } catch (error) {
             console.error("Order error:", error);
-            alert("Failed to place order. Please check your connection.");
+            showToast('Failed to place order. Please check your connection.', 'error');
         }
     }
 
     document.addEventListener('DOMContentLoaded', renderCart);
 </script>
+
+<div id="toast-container" class="toast-container"></div>
 
 <?php require base_path('views/partials/footer.php') ?>

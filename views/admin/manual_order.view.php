@@ -355,17 +355,17 @@ require base_path('views/partials/head.php') ?>
 
             const data = await response.json();
             if (data.success) {
-                alert(`Order created successfully! Order ID: #${data.order_id}`);
+                showToast(`Order created successfully! Order ID: #${data.order_id}`, 'success');
                 cart = {};
                 document.getElementById('notesArea').value = '';
                 document.getElementById('userSelect').value = '';
                 onUserChange();
                 renderAll();
             } else {
-                showToast(data.message, 'red');
+                showToast(data.message, 'error');
             }
         } catch (err) {
-            showToast('Failed to send order', 'red');
+            showToast('Failed to send order', 'error');
         } finally {
             btn.textContent = '✅ Confirm Order';
             updateConfirmBtn();

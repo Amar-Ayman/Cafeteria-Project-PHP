@@ -21,8 +21,10 @@ require base_path('views/partials/nav.php');
    .user-table tbody tr:hover { background-color: rgba(184, 151, 58, 0.03); }
    .user-table img { border-radius: 12px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.2s ease; }
    .user-table img:hover { transform: scale(1.08); }
-   .edit { background-color: #277bd4; color: white; display: inline-block; width: 80px; padding: 5px 0; border-radius: 15px; text-decoration: none; font-size: 16px; }
-   .delete { background-color: #ca3535; color: white; display: inline-block; width: 80px; padding: 5px 0; border-radius: 15px; text-decoration: none; font-size: 16px; }
+   .edit { background-color: var(--gold); color: white; display: inline-block; width: 80px; padding: 5px 0; border-radius: 15px; text-decoration: none; font-size: 16px; transition: 0.3s; }
+   .edit:hover { background-color: var(--dark); }
+   .delete { background-color: #E05252; color: white; display: inline-block; width: 80px; padding: 5px 0; border-radius: 15px; text-decoration: none; font-size: 16px; transition: 0.3s; }
+   .delete:hover { background-color: #c91e1e; }
 </style>
 
 <main>
