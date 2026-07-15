@@ -7,20 +7,20 @@ require base_path("views/partials/nav.php");
 ?>
 <style>
    :root {
-      --gold:         #B8973A;              
-      --gold-lt:      #D4AF55;              
-      --gold-dk:      #EDD98A;              
-      --bg:           #FDFAF4;              
-      --surface:      #F5EFE0;              
-      --card:         #FFFFFF;              
-      --border:       rgba(184,151,58,.25);  
-      --border-lt:    rgba(184,151,58,.12);  
-      --text:         #2C2418;              
-      --muted:        #6B5B3E;              
-      --green:        #4CAF8A;              
-      --dark:         #1E1A12;              
-      --white:        #FFFFFF;              
+      --gold: #B8973A;              
+      --gold-light: #D4AF55;              
+      --gold-pale: #EDD98A;              
+      --gold-faint: #F7F0DC;              
+      --bg: #FDFAF4;              
+      --surface: #F5EFE0;              
+      --card: #FFFFFF;              
+      --border: rgba(184,151,58,.2);  
+      --text: #2C2418;              
+      --muted: #6B5B3E;              
+      --dark: #1E1A12;              
+      --white: #FFFFFF;
    }
+
 
    .products-container {
       max-width: 1200px;
@@ -47,6 +47,9 @@ require base_path("views/partials/nav.php");
       text-transform: uppercase;
       position: relative;
       margin: 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      letter-spacing: 3px;
    }
 
    .products-title::after {
@@ -60,8 +63,8 @@ require base_path("views/partials/nav.php");
    }
 
    .btn-cart {
-      background: var(--gold);
-      color: var(--white);
+      background: var(--dark);
+      color: var(--gold-pale);
       text-decoration: none;
       padding: 12px 25px;
       border-radius: 30px;
@@ -69,14 +72,16 @@ require base_path("views/partials/nav.php");
       display: flex;
       align-items: center;
       gap: 10px;
-      transition: 0.3s;
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
       box-shadow: 0 4px 15px rgba(184, 151, 58, 0.2);
    }
 
    .btn-cart:hover {
-      background: #654321  ;
-      /* transform: translateY(-2px); */
-      scale: 1.1;
+       background: var(--gold);
+      color: var(--white);
+      border-color: var(--gold);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(184, 151, 58, 0.3);
    }
 
    .cart-count {
@@ -87,6 +92,7 @@ require base_path("views/partials/nav.php");
       font-size: 14px;
    }
 
+   /* Category Filter */
    .category-filter {
       display: flex;
       justify-content: center;
@@ -103,14 +109,18 @@ require base_path("views/partials/nav.php");
       border-radius: 20px;
       font-size: 14px;
       font-weight: 500;
-      transition: 0.3s;
+      transition: all 0.4s ease;
       background: var(--white);
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 2px;
    }
 
    .filter-link:hover, .filter-link.active {
-      background: var(--gold);
-      color: var(--white);
-      border-color: var(--gold);
+      background: var(--dark);
+      color: var(--gold-pale);
+      border-color: var(--dark);
+      transform: translateY(-2px);
    }
 
    .products-grid {
@@ -120,19 +130,21 @@ require base_path("views/partials/nav.php");
    }
 
    .product-card {
-      background: #F6EBDD;
-      border: 1px solid #D4AF55;
+      background: var(--card);
+      border: 1px solid var(--gold-faint);
       border-radius: 15px;
       overflow: hidden;
       box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-      transition: 0.3s;
+      transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
       display: flex;
       flex-direction: column;
+      position: relative;
    }
 
    .product-card:hover {
-      box-shadow: 0 0 10px #D4AF55;
-      transform: translateY(-10px);
+      transform: translateY(-15px);
+      box-shadow: 0 30px 60px rgba(184, 151, 58, 0.15);
+      border-color: var(--gold-pale);
    }
 
    .product-image-wrapper {
@@ -140,25 +152,54 @@ require base_path("views/partials/nav.php");
       height: 200px;
       background-color: var(--bg);
       overflow: hidden;
+      position: relative;
    }
 
    .product-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: 0.5s;
+      transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+   }
+
+   .product-card:hover img {
+      transform: scale(1.15);
+   }
+
+   /* Subtle Overlay on Hover */
+   .product-image-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent 0%, rgba(44, 36, 24, 0.2) 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+   }
+
+   .product-card:hover .product-image-wrapper::after {
+      opacity: 1;
    }
 
    .product-info {
       padding: 20px;
       text-align: center;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--white);
    }
 
    .product-name {
       font-size: 18px;
-      color: var(--text);
+      color: var(--text-dark);
       margin: 0 0 8px 0;
       font-weight: bold;
+      font-family: 'Cormorant Garamond', serif;
+      letter-spacing: 1px;
    }
 
    .product-price {
@@ -166,27 +207,55 @@ require base_path("views/partials/nav.php");
       color: var(--gold);
       font-weight: 700;
       margin-bottom: 15px;
+      font-family: 'Jost', sans-serif;
+      letter-spacing: 1px;
    }
 
    .btn-add-order {
-      width: 90%;
-      background: #fff;
+      width: 100%;
+      background: transparent;
       color: var(--gold);
-      border: 1px solid var(--gold-pale);
+      border: 1px solid var(--gold);
       padding: 10px;
       border-radius: 20px;
       cursor: pointer;
       font-weight: 600;
       font-family: 'Jost', sans-serif;
-      transition: 0.3s;
+      transition: all 0.4s ease;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
    }
+
+   .btn-add-order::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--gold);
+      transition: all 0.4s ease;
+      z-index: -1;
+   }
+
 
    .btn-add-order:hover {
-      background: var(--gold);
       color: var(--white);
-      border-color: var(--gold);
+   }
+   
+   .btn-add-order:hover::before {
+      left: 0;
    }
 
+   .btn-add-order.added {
+      background: var(--dark);
+      border-color: var(--dark);
+      color: var(--gold-pale);
+   }
    .no-products {
       text-align: center;
       padding: 50px;

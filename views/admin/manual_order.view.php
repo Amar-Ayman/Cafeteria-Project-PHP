@@ -166,7 +166,7 @@ require base_path('views/partials/head.php') ?>
                 <span id="totalAmt">0 EGP</span>
             </div>
 
-            <button id="confirmBtn" class="btn-confirm" onclick="confirmOrder()" disabled>✅ Confirm Order</button>
+            <button id="confirmBtn" class="btn-confirm" onclick="confirmOrder()" disabled>Confirm Order</button>
         </div>
     </div>
 </div>
